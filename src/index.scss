@@ -25,17 +25,3 @@ textarea,
 select {
   font: inherit;
 }
-
-.App {
-  background-color: var(--app-background-color);
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 2rem;
-}
-
-.App-container {
-  height: 100%;
-  width: 40%;
-  background-color: var(--container-background-color);
-}
