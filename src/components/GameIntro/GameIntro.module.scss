@@ -1,0 +1,52 @@
+@use '../../styles/mixins.scss';
+
+.intro {
+  @include mixins.game-container;
+  align-content: space-around;
+  justify-items: center;
+  font-family: 'Tilt Neon', cursive;
+}
+
+.heading {
+  font-family: 'Tilt Warp', cursive;
+  font-size: 5rem;
+}
+
+.instructions {
+  &-text {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.targets {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-around;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  @include mixins.mobile {
+    margin: 1rem;
+  }
+}
+
+.target {
+  transition: transform 0.2s;
+  &-img {
+    width: 12rem;
+    height: 12rem;
+
+    @include mixins.mobile {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+
+  &-name {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
