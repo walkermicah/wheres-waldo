@@ -1,9 +1,6 @@
 import StartGameBtn from '../StartGameBtn';
 import { Target } from '../../types/types';
 import styles from './GameIntro.module.scss';
-import waldo from '../../assets/waldo.jpg';
-import odlaw from '../../assets/odlaw.jpg';
-import wizard from '../../assets/wizard.jpg';
 
 type GameIntroProps = {
   targetList: Target[];
@@ -26,8 +23,8 @@ const GameIntro = ({ targetList }: GameIntroProps): JSX.Element => {
         <div className={text}>Can you find these 3 characters?</div>
         <div className={targets}>
           {targetList.map(
-            (t: { name: string; imgUrl: string }): JSX.Element => (
-              <div className={target}>
+            (t: Target): JSX.Element => (
+              <div className={target} key={t.name}>
                 <img src={t.imgUrl} alt={t.name} className={image} />
                 <p className={name}>{t.name}</p>
               </div>
