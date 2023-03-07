@@ -7,7 +7,7 @@ type GameIntroProps = {
 };
 
 const GameIntro = ({ targetList }: GameIntroProps): JSX.Element => {
-  const intro: string = styles.intro;
+  const gameIntro: string = styles.gameintro;
   const heading: string = styles.heading;
   const instructions: string = styles.instructions;
   const text: string = styles['instructions-text'];
@@ -17,7 +17,7 @@ const GameIntro = ({ targetList }: GameIntroProps): JSX.Element => {
   const name: string = styles['target-name'];
 
   return (
-    <div className={intro}>
+    <div className={gameIntro}>
       <h1 className={heading}>Where's Waldo?</h1>
       <div className={instructions}>
         <div className={text}>Can you find these 3 characters?</div>

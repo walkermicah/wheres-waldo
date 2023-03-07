@@ -1,6 +1,6 @@
 @use '../../styles/mixins.scss';
 
-.intro {
+.gameintro {
   @include mixins.game-container;
   align-content: space-around;
   justify-items: center;
