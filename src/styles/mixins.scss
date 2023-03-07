@@ -1,7 +1,7 @@
 @use './global-styles.scss' as global;
 
 @mixin game-container {
-  width: 40%;
+  width: 50%;
   background-color: global.$container-background-color;
   font-family: 'Tilt Neon', cursive;
   text-align: center;
@@ -28,7 +28,7 @@
   cursor: pointer;
 
   &:hover {
-    background-color: global.$button-hover-color;
+    background-color: global.$accent-color;
   }
 }
 
