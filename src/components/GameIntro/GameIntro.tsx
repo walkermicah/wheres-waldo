@@ -8,7 +8,6 @@ type GameIntroProps = {
 
 const GameIntro = ({ targetList }: GameIntroProps): JSX.Element => {
   const gameIntro: string = styles.gameintro;
-  const heading: string = styles.heading;
   const instructions: string = styles.instructions;
   const text: string = styles['instructions-text'];
   const targets: string = styles.targets;
@@ -18,7 +17,7 @@ const GameIntro = ({ targetList }: GameIntroProps): JSX.Element => {
 
   return (
     <div className={gameIntro}>
-      <h1 className={heading}>Where's Waldo?</h1>
+      <h1>Where's Waldo?</h1>
       <div className={instructions}>
         <div className={text}>Can you find these 3 characters?</div>
         <div className={targets}>
