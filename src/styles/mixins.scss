@@ -21,7 +21,7 @@
 @mixin button {
   padding: 1rem 2rem;
   font-size: 2rem;
-  background-color: inherit;
+  background-color: global.$container-background-color;
   border-style: none;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
