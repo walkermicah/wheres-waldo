@@ -1,0 +1,9 @@
+@use '../../styles/global-styles.scss' as global;
+
+.gameover {
+  position: absolute;
+  top: 25%;
+  justify-self: center;
+  padding: 1rem;
+  background-color: global.$container-border-color;
+}
