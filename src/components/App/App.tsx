@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import GameIntro from '../GameIntro';
+import Game from '../Game';
 import { Target } from '../../types/types';
 import styles from './App.module.scss';
 import waldo from '../../assets/waldo.jpg';
@@ -13,12 +14,16 @@ const App = (): JSX.Element => {
     { name: 'Odlaw', imgUrl: odlaw },
   ];
 
-  const [gameStatus, setGameStatus] = useState<string>('start');
+  const [gameStatus, setGameStatus] = useState<string>('active');
   // found
 
   return (
     <div className={styles.App}>
-      {gameStatus === 'start' && <GameIntro targetList={targetList} />}
+      {gameStatus === 'start' ? (
+        <GameIntro targetList={targetList} />
+      ) : (
+        <Game status={gameStatus} />
+      )}
     </div>
   );
 };
