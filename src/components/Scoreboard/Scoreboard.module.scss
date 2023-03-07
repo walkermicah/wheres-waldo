@@ -1,0 +1,30 @@
+@use '../../styles/global-styles.scss' as global;
+
+.scoreboard {
+  background-color: global.$accent-color;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.targets {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  div {
+    width: 3.5rem;
+    height: 3.5rem;
+    background-color: blue;
+    border-radius: 50%;
+  }
+}
+
+.timer {
+  display: grid;
+  justify-content: end;
+  font-size: 2.5rem;
+  padding: 0.25rem 0.5rem;
+  letter-spacing: 2px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
