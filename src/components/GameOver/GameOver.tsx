@@ -1,3 +1,5 @@
+import ScoreTable from '../ScoreTable';
+import ScoreForm from '../ScoreForm';
 import StartGameBtn from '../StartGameBtn';
 import styles from './GameOver.module.scss';
 
@@ -6,6 +8,8 @@ const GameOver = (): JSX.Element => {
 
   return (
     <div className={gameover}>
+      <ScoreTable />
+      <ScoreForm />
       <StartGameBtn btnText="Try again" />
     </div>
   );
