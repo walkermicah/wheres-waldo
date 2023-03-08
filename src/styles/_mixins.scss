@@ -1,12 +1,12 @@
-@use './global-styles.scss' as global;
+@use './variables.scss';
 
 @mixin game-container {
   width: 50%;
-  background-color: global.$container-background-color;
+  background-color: variables.$container-background-color;
   font-family: 'Tilt Neon', cursive;
   text-align: center;
   display: grid;
-  border: 3px solid global.$container-border-color;
+  border: 3px solid variables.$container-border-color;
 
   h1 {
     font-family: 'Tilt Warp', cursive;
@@ -21,14 +21,14 @@
 @mixin button {
   padding: 1rem 2rem;
   font-size: 2rem;
-  background-color: global.$container-background-color;
+  background-color: variables.$container-background-color;
   border-style: none;
   border-radius: 3px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   cursor: pointer;
 
   &:hover {
-    background-color: global.$accent-color;
+    background-color: variables.$accent-color;
   }
 }
 
