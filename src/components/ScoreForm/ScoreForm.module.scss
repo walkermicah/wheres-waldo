@@ -40,5 +40,6 @@
   button {
     @include mixins.button;
     justify-self: center;
+    font-size: 1.25rem;
   }
 }
