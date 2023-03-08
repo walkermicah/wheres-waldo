@@ -1,30 +1,33 @@
-import { useState } from 'react';
+import { useState, createContext } from 'react';
+import { Target } from '../../types/types';
 import GameIntro from '../GameIntro';
 import Game from '../Game';
-import { Target } from '../../types/types';
 import styles from './App.module.scss';
 import waldo from '../../assets/waldo.jpg';
 import wizard from '../../assets/wizard.jpg';
 import odlaw from '../../assets/odlaw.jpg';
 
+export const TargetListContext = createContext<Target[]>([
+  { name: 'Waldo', imgUrl: waldo, found: false },
+  { name: 'Wizard', imgUrl: wizard, found: false },
+  { name: 'Odlaw', imgUrl: odlaw, found: false },
+]);
+
 const App = (): JSX.Element => {
-  const targetList: Target[] = [
-    { name: 'Waldo', imgUrl: waldo },
-    { name: 'Wizard', imgUrl: wizard },
-    { name: 'Odlaw', imgUrl: odlaw },
-  ];
+  const [targetList, setTargetList] = useState<Target[]>([
+    { name: 'Waldo', imgUrl: waldo, found: false },
+    { name: 'Wizard', imgUrl: wizard, found: false },
+    { name: 'Odlaw', imgUrl: odlaw, found: false },
+  ]);
 
   const [gameStatus, setGameStatus] = useState<string>('active');
-  // found
 
   return (
-    <div className={styles.App}>
-      {gameStatus === 'start' ? (
-        <GameIntro targetList={targetList} />
-      ) : (
-        <Game status={gameStatus} />
-      )}
-    </div>
+    <TargetListContext.Provider value={targetList}>
+      <div className={styles.App}>
+        {gameStatus === 'start' ? <GameIntro /> : <Game status={gameStatus} />}
+      </div>
+    </TargetListContext.Provider>
   );
 };
 

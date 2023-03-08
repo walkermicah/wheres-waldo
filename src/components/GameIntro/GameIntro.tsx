@@ -1,12 +1,12 @@
-import StartGameBtn from '../StartGameBtn';
+import { useContext } from 'react';
+import { TargetListContext } from '../App';
 import { Target } from '../../types/types';
+import StartGameBtn from '../StartGameBtn';
 import styles from './GameIntro.module.scss';
 
-type GameIntroProps = {
-  targetList: Target[];
-};
+const GameIntro = (): JSX.Element => {
+  const targetList = useContext<Target[]>(TargetListContext);
 
-const GameIntro = ({ targetList }: GameIntroProps): JSX.Element => {
   const gameIntro: string = styles.gameintro;
   const instructions: string = styles.instructions;
   const text: string = styles['instructions-text'];
