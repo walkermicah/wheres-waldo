@@ -12,22 +12,19 @@ const ScoreTable = (): JSX.Element => {
   const row: string = styles.row;
 
   return (
-    <table className={table}>
-      <thead>
-        <tr>
-          <td>Name</td>
-          <td>Score</td>
-        </tr>
-      </thead>
-      <tbody>
-        {scores.map((score) => (
-          <tr className={row}>
-            <td>{score.name}</td>
-            <td>{score.time}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div>
+      <table className={table}>
+        <caption>Best Times</caption>
+        <tbody>
+          {scores.map((score) => (
+            <tr className={row}>
+              <td>{score.name}</td>
+              <td>{score.time}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

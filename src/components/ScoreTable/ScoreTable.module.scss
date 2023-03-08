@@ -2,13 +2,11 @@
 
 .table {
   background-color: variables.$container-background-color;
-  border-radius: 3px;
 
-  thead {
+  caption {
+    background-color: white;
     font-size: 3rem;
     text-transform: uppercase;
-
-    display: inline-table;
   }
 
   tbody {
