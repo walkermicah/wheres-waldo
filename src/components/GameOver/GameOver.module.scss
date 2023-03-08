@@ -2,8 +2,11 @@
 
 .gameover {
   position: absolute;
-  top: 25%;
+  top: 15%;
   justify-self: center;
   padding: 1rem;
   background-color: variables.$container-border-color;
+  display: grid;
+  gap: 2rem;
+  justify-items: center;
 }
