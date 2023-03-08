@@ -1,8 +1,8 @@
-@use '../../styles/global-styles.scss' as global;
+@use '../../styles/variables.scss';
 
 .scoreboard {
   width: 100%;
-  background-color: global.$container-background-color;
+  background-color: variables.$container-background-color;
   display: flex;
   justify-content: space-between;
   padding: 1rem;

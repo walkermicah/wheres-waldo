@@ -1,7 +1,7 @@
-@use '../../styles/global-styles.scss' as global;
+@use '../../styles/variables.scss';
 
 .App {
-  background-color: global.$app-background-color;
+  background-color: variables.$app-background-color;
   min-height: 100vh;
   display: grid;
   justify-items: center;
