@@ -1,0 +1,44 @@
+@use '../../styles/mixins.scss';
+@use '../../styles/variables.scss';
+
+.form {
+  background-color: variables.$container-background-color;
+  padding: 0.5rem;
+  gap: 0.5rem;
+
+  h2 {
+    grid-area: heading;
+    font-size: 2rem;
+    text-transform: uppercase;
+  }
+
+  &-fields {
+    display: flex;
+  }
+
+  &-field {
+    display: grid;
+    padding: 0rem 0.5rem;
+    margin-bottom: 0.5rem;
+
+    label {
+      justify-self: start;
+      text-transform: uppercase;
+      font-size: 1.25rem;
+    }
+    input {
+      font-size: 1.25rem;
+      padding: 0.5rem;
+    }
+
+    input:focus {
+      border: 2px solid black;
+      outline: none;
+    }
+  }
+
+  button {
+    @include mixins.button;
+    justify-self: center;
+  }
+}
