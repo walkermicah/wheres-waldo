@@ -13,12 +13,16 @@
   display: flex;
   gap: 1rem;
 
-  div {
-    width: 3.5rem;
-    height: 3.5rem;
-    background-color: blue;
+  img {
+    width: 8rem;
+    height: 8rem;
     border-radius: 50%;
   }
+}
+
+.found {
+  filter: brightness(50%);
+  opacity: 50%;
 }
 
 .timer {
