@@ -13,8 +13,10 @@ const ScoreForm = (): JSX.Element => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    if (playerName === '') return;
     const score: Score = { name: playerName, time: time };
     console.log(score);
+    setPlayerName('');
   };
 
   const form: string = styles.form;
@@ -29,7 +31,12 @@ const ScoreForm = (): JSX.Element => {
       <div className={formFields}>
         <div className={formField}>
           <label htmlFor="name">Name</label>
-          <input name="name" value={playerName} onChange={handleChange} />
+          <input
+            name="name"
+            value={playerName}
+            onChange={handleChange}
+            autoFocus
+          />
         </div>
         <div className={formField}>
           <label htmlFor="time">Time</label>
