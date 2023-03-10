@@ -22,12 +22,13 @@ const Game = (): JSX.Element => {
   };
 
   const { gameStatus } = useContext(AppContext);
-  const game: string =
-    gameStatus === 'active' ? styles['game-active'] : styles['game-over'];
+  const game: string = styles.game;
+  const gameOver: string = gameStatus === 'over' ? styles['game-over'] : '';
+  const gameImg: string = styles['game-img'];
 
   return (
-    <div className={game} onClick={handleClick}>
-      <img src={scene} alt="scene" />
+    <div className={`${game} ${gameOver}`} onClick={handleClick}>
+      <img src={scene} alt="scene" className={gameImg} />
       {/* render target box at click location (w inline styles?) */}
       {targetStatus === 'targeted' && <TargetingBox />}
     </div>
@@ -35,6 +36,3 @@ const Game = (): JSX.Element => {
 };
 
 export default Game;
-
-// To do:
-// Style target box

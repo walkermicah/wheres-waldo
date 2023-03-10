@@ -1,14 +1,13 @@
-.game-active,
-.game-over {
+.game {
   z-index: 0;
 
-  img {
+  &-img {
     width: 100%;
     height: 100%;
   }
-}
 
-.game-over {
-  opacity: 50%;
-  pointer-events: none;
+  &-over {
+    opacity: 50%;
+    pointer-events: none;
+  }
 }
