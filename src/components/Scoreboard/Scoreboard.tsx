@@ -13,9 +13,11 @@ const Scoreboard = (): JSX.Element => {
   return (
     <div className={scoreboard}>
       <div className={targets}>
-        {targetList.map((t) => (
-          <img src={t.imgUrl} alt={t.name} className={t.found ? found : ''} />
-        ))}
+        {targetList.map(
+          (t): JSX.Element => (
+            <img src={t.imgUrl} alt={t.name} className={t.found ? found : ''} />
+          )
+        )}
       </div>
       <Timer />
     </div>

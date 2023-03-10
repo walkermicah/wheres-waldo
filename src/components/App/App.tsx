@@ -19,7 +19,7 @@ const App = (): JSX.Element => {
   const [gameStatus, setGameStatus] = useState<string>('over');
 
   const markTargetFound = (targetName: string): void => {
-    const newTargetList = targetList.map((t) => {
+    const newTargetList = targetList.map((t): Target => {
       return t.name === targetName ? { ...t, found: true } : t;
     });
     setTargetList(newTargetList);
@@ -41,5 +41,3 @@ const App = (): JSX.Element => {
 };
 
 export default App;
-
-// render Game div from GameContainer

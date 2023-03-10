@@ -22,7 +22,7 @@ const GameIntro = (): JSX.Element => {
         <div className={text}>Can you find these 3 characters?</div>
         <div className={targets}>
           {targetList.map(
-            (t: Target): JSX.Element => (
+            (t): JSX.Element => (
               <div className={target} key={t.name}>
                 <img src={t.imgUrl} alt={t.name} className={image} />
                 <p className={name}>{t.name}</p>

@@ -16,12 +16,14 @@ const ScoreTable = (): JSX.Element => {
       <table className={table}>
         <caption>Best Times</caption>
         <tbody>
-          {scores.map((score) => (
-            <tr className={row}>
-              <td>{score.name}</td>
-              <td>{score.time}</td>
-            </tr>
-          ))}
+          {scores.map(
+            (score): JSX.Element => (
+              <tr className={row}>
+                <td>{score.name}</td>
+                <td>{score.time}</td>
+              </tr>
+            )
+          )}
         </tbody>
       </table>
     </div>
