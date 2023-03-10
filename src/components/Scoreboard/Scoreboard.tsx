@@ -1,11 +1,10 @@
 import { useContext } from 'react';
-import { TargetListContext } from '../App';
-import { Target } from '../../types/types';
+import TargetContext from '../../context/TargetContext';
 import styles from './Scoreboard.module.scss';
 
 const Scoreboard = (): JSX.Element => {
   const time: string = '1:23';
-  const targetList = useContext<Target[]>(TargetListContext);
+  const { targetList } = useContext(TargetContext);
 
   const scoreboard: string = styles.scoreboard;
   const targets: string = styles.targets;
