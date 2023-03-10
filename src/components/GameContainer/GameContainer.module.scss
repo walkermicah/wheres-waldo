@@ -1,0 +1,7 @@
+@use '../../styles/mixins.scss';
+
+.game-container {
+  @include mixins.game-container;
+  grid-template-rows: 10% 90%;
+  position: relative;
+}
