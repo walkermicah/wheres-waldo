@@ -20,10 +20,7 @@ const App = (): JSX.Element => {
 
   const markTargetFound = (targetName: string): void => {
     const newTargetList = targetList.map((t) => {
-      if (t.name === targetName) {
-        return { ...t, found: true };
-      }
-      return t;
+      return t.name === targetName ? { ...t, found: true } : t;
     });
     setTargetList(newTargetList);
   };
@@ -44,3 +41,6 @@ const App = (): JSX.Element => {
 };
 
 export default App;
+
+// change Game name to GameContainer
+// render Game div from GameContainer
