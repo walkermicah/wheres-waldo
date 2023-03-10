@@ -8,6 +8,7 @@ const TargetingBox = (): JSX.Element => {
   const box: string = styles.box;
   const targets: string = styles.targets;
   const target: string = styles.target;
+  const targetImg: string = styles['target-img'];
 
   return (
     <>
@@ -15,8 +16,7 @@ const TargetingBox = (): JSX.Element => {
         <div className={targets} id="targets">
           {targetList.map((t) => (
             <div className={target} key={t.name}>
-              <img src={t.imgUrl} alt={t.name} />
-              <p>{t.name}</p>
+              <img src={t.imgUrl} alt={t.name} className={targetImg} />
             </div>
           ))}
         </div>
