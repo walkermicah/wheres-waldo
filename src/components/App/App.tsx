@@ -3,7 +3,7 @@ import TargetContext from '../../context/TargetContext';
 import GameStatusContext from '../../context/GameStatusContext';
 import { Target } from '../../types/types';
 import GameIntro from '../GameIntro';
-import Game from '../Game';
+import GameContainer from '../GameContainer';
 import styles from './App.module.scss';
 import waldo from '../../assets/waldo.jpg';
 import wizard from '../../assets/wizard.jpg';
@@ -33,7 +33,7 @@ const App = (): JSX.Element => {
     <div className={styles.App}>
       <TargetContext.Provider value={{ targetList, markTargetFound }}>
         <GameStatusContext.Provider value={{ gameStatus, updateGameStatus }}>
-          {gameStatus === 'start' ? <GameIntro /> : <Game />}
+          {gameStatus === 'start' ? <GameIntro /> : <GameContainer />}
         </GameStatusContext.Provider>
       </TargetContext.Provider>
     </div>
@@ -42,5 +42,4 @@ const App = (): JSX.Element => {
 
 export default App;
 
-// change Game name to GameContainer
 // render Game div from GameContainer
