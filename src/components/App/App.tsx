@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import TargetContext from '../../context/TargetContext';
-import GameStatusContext from '../../context/GameStatusContext';
+import AppContext from '../../context/AppContext';
 import { Target } from '../../types/types';
 import GameIntro from '../GameIntro';
 import GameContainer from '../GameContainer';
@@ -31,11 +30,11 @@ const App = (): JSX.Element => {
 
   return (
     <div className={styles.App}>
-      <TargetContext.Provider value={{ targetList, markTargetFound }}>
-        <GameStatusContext.Provider value={{ gameStatus, updateGameStatus }}>
-          {gameStatus === 'start' ? <GameIntro /> : <GameContainer />}
-        </GameStatusContext.Provider>
-      </TargetContext.Provider>
+      <AppContext.Provider
+        value={{ targetList, gameStatus, markTargetFound, updateGameStatus }}
+      >
+        {gameStatus === 'start' ? <GameIntro /> : <GameContainer />}
+      </AppContext.Provider>
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import { useContext } from 'react';
-import TargetContext from '../../context/TargetContext';
-import { Target } from '../../types/types';
+import AppContext from '../../context/AppContext';
 import StartGameBtn from '../StartGameBtn';
 import styles from './GameIntro.module.scss';
 
 const GameIntro = (): JSX.Element => {
-  const { targetList } = useContext(TargetContext);
+  const { targetList } = useContext(AppContext);
 
   const gameIntro: string = styles.gameintro;
   const instructions: string = styles.instructions;

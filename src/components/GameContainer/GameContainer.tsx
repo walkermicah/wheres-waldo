@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import GameStatusContext from '../../context/GameStatusContext';
+import AppContext from '../../context/AppContext';
 import Scoreboard from '../Scoreboard';
 import Game from '../Game';
 import GameOver from '../GameOver';
@@ -8,7 +8,7 @@ import styles from './GameContainer.module.scss';
 import { useState } from 'react';
 
 const GameContainer = (): JSX.Element => {
-  const { gameStatus } = useContext(GameStatusContext);
+  const { gameStatus } = useContext(AppContext);
   const [time, setTime] = useState<string>('0:00');
 
   const incrementTime = (): void => {

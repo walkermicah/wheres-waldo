@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import GameStatusContext from '../../context/GameStatusContext';
+import AppContext from '../../context/AppContext';
 import styles from './StartGameBtn.module.scss';
 
 type StartGameBtnProps = {
@@ -7,7 +7,7 @@ type StartGameBtnProps = {
 };
 
 const StartGameBtn = ({ btnText }: StartGameBtnProps): JSX.Element => {
-  const { updateGameStatus } = useContext(GameStatusContext);
+  const { updateGameStatus } = useContext(AppContext);
 
   const startBtn: string = styles.startBtn;
 

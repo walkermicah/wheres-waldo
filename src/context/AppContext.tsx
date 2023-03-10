@@ -4,9 +4,11 @@ import waldo from '../assets/waldo.jpg';
 import wizard from '../assets/wizard.jpg';
 import odlaw from '../assets/odlaw.jpg';
 
-interface ITargetContext {
+interface IAppContext {
   targetList: Target[];
+  gameStatus: string;
   markTargetFound?: (targetName: string) => void;
+  updateGameStatus?: (newStatus: string) => void;
 }
 
 const defaultState = {
@@ -15,8 +17,9 @@ const defaultState = {
     { name: 'Wizard', imgUrl: wizard, found: false },
     { name: 'Odlaw', imgUrl: odlaw, found: false },
   ],
+  gameStatus: 'start',
 };
 
-const TargetContext = createContext<ITargetContext>(defaultState);
+const AppContext = createContext<IAppContext>(defaultState);
 
-export default TargetContext;
+export default AppContext;
