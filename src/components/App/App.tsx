@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import TargetContext from '../../context/TargetContext';
+import GameStatusContext from '../../context/GameStatusContext';
 import { Target } from '../../types/types';
 import GameIntro from '../GameIntro';
 import Game from '../Game';
@@ -15,7 +16,7 @@ const App = (): JSX.Element => {
     { name: 'Odlaw', imgUrl: odlaw, found: false },
   ]);
 
-  const [gameStatus, setGameStatus] = useState<string>('start');
+  const [gameStatus, setGameStatus] = useState<string>('over');
 
   const markTargetFound = (targetName: string): void => {
     const newTargetList = targetList.map((t) => {
@@ -27,10 +28,16 @@ const App = (): JSX.Element => {
     setTargetList(newTargetList);
   };
 
+  const updateGameStatus = (newStatus: string): void => {
+    setGameStatus(newStatus);
+  };
+
   return (
     <div className={styles.App}>
       <TargetContext.Provider value={{ targetList, markTargetFound }}>
-        {gameStatus === 'start' ? <GameIntro /> : <Game status={gameStatus} />}
+        <GameStatusContext.Provider value={{ gameStatus, updateGameStatus }}>
+          {gameStatus === 'start' ? <GameIntro /> : <Game />}
+        </GameStatusContext.Provider>
       </TargetContext.Provider>
     </div>
   );
