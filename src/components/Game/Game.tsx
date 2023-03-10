@@ -1,26 +1,35 @@
 import { useContext, useState } from 'react';
 import AppContext from '../../context/AppContext';
+import TargetingBox from '../TargetingBox';
 import styles from './Game.module.scss';
 import scene from '../../assets/scene.jpg';
 
 const Game = (): JSX.Element => {
   const [targetStatus, setTargetStatus] = useState<string>('searching');
+  // click location in state
 
-  // toggle target status function: switch between searching/targeted
+  const toggleTargetStatus = (): void => {
+    const newStatus = targetStatus === 'searching' ? 'targeted' : 'searching';
+    setTargetStatus(newStatus);
+  };
 
-  // handleClick:
-  // if !targetBox is the e.target return
-  //toggle targetStatus
+  // function to save click location
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
+    if ((e.target as HTMLInputElement).id === 'targets') return;
+    // if targetStatus = 'looking' call function to save click location in state
+    toggleTargetStatus();
+  };
 
   const { gameStatus } = useContext(AppContext);
   const game: string =
     gameStatus === 'active' ? styles['game-active'] : styles['game-over'];
 
   return (
-    // onClick: handleClick
-    <div className={game}>
+    <div className={game} onClick={handleClick}>
       <img src={scene} alt="scene" />
-      {/* if targetStatus = targeted, render target box */}
+      {/* render target box at click location (w inline styles?) */}
+      {targetStatus === 'targeted' && <TargetingBox />}
     </div>
   );
 };
@@ -28,8 +37,4 @@ const Game = (): JSX.Element => {
 export default Game;
 
 // To do:
-// click location in state
-// function to save click location
-// in handleClick: targetStatus = 'looking' call function to save click location in state
-// render target box at click location
 // Style target box
