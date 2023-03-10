@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import TimerContext from '../../context/TimerContext';
 import { Score } from '../../types/types';
 import styles from './ScoreForm.module.scss';
 
-const time = '1:34';
-
 const ScoreForm = (): JSX.Element => {
+  const { time } = useContext(TimerContext);
   const [playerName, setPlayerName] = useState<string>('');
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
