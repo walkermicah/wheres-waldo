@@ -15,7 +15,12 @@ const Scoreboard = (): JSX.Element => {
       <div className={targets}>
         {targetList.map(
           (t): JSX.Element => (
-            <img src={t.imgUrl} alt={t.name} className={t.found ? found : ''} />
+            <img
+              src={t.imgUrl}
+              alt={t.name}
+              className={t.found ? found : ''}
+              key={t.name}
+            />
           )
         )}
       </div>
