@@ -17,6 +17,7 @@ const TargetingBox = ({ clickCoords }: TargetingBoxProps): JSX.Element => {
   const targetsXOrientation: string =
     clickCoords.x < 50 ? styles['targets-right'] : styles['targets-left'];
   const target: string = styles.target;
+  const found: string = styles['target-found'];
   const targetImg: string = styles['target-img'];
 
   return (
@@ -29,7 +30,7 @@ const TargetingBox = ({ clickCoords }: TargetingBoxProps): JSX.Element => {
           className={`${targets} ${targetsYOrientation} ${targetsXOrientation}`}
         >
           {targetList.map((t) => (
-            <div className={target} key={t.name}>
+            <div className={`${target} ${t.found && found}`} key={t.name}>
               <img src={t.imgUrl} alt={t.name} className={targetImg} />
             </div>
           ))}

@@ -11,10 +11,8 @@
 
 .targets {
   position: absolute;
-  background-color: variables.$primary-color;
   border: 1px solid black;
   display: grid;
-  cursor: pointer;
 }
 
 .targets-up {
@@ -34,12 +32,19 @@
 }
 
 .target {
+  cursor: pointer;
+  background-color: variables.$primary-color;
   padding: 1rem;
   display: flex;
   display: flex;
   align-items: center;
   gap: 1rem;
   font-size: 1.25rem;
+
+  &-found {
+    filter: brightness(50%);
+    pointer-events: none;
+  }
 
   &-img {
     width: 5rem;
