@@ -8,3 +8,8 @@ export type Score = {
   name: string;
   time: string;
 };
+
+export type ClickCoords = {
+  x: number;
+  y: number;
+};
