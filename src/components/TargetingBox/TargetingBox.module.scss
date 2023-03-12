@@ -1,21 +1,36 @@
 @use '../../styles/variables.scss';
 
 .box {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   background-color: transparent;
   border: 2px dashed black;
-  position: relative;
+  position: absolute;
+  transform: translateX(-2rem) translateY(-2rem);
 }
 
 .targets {
   position: absolute;
-  bottom: 105%;
-  left: 105%;
   background-color: variables.$primary-color;
   border: 1px solid black;
   display: grid;
   cursor: pointer;
+}
+
+.targets-up {
+  bottom: 105%;
+}
+
+.targets-down {
+  top: 105%;
+}
+
+.targets-left {
+  right: 105%;
+}
+
+.targets-right {
+  left: 105%;
 }
 
 .target {
