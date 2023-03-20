@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AppContext from '../../context/AppContext';
+import { SnackbarContextProvider } from '../../context/SnackbarContext';
 import { Target } from '../../types/types';
 import GameIntro from '../GameIntro';
 import GameContainer from '../GameContainer';
@@ -15,7 +16,7 @@ const App = (): JSX.Element => {
     { name: 'Odlaw', imgUrl: odlaw, found: false },
   ]);
 
-  const [gameStatus, setGameStatus] = useState<string>('over');
+  const [gameStatus, setGameStatus] = useState<string>('start');
 
   const markTargetFound = (targetName: string): void => {
     const newTargetList = targetList.map((t): Target => {
@@ -33,7 +34,9 @@ const App = (): JSX.Element => {
       <AppContext.Provider
         value={{ targetList, gameStatus, markTargetFound, updateGameStatus }}
       >
-        {gameStatus === 'start' ? <GameIntro /> : <GameContainer />}
+        <SnackbarContextProvider>
+          {gameStatus === 'start' ? <GameIntro /> : <GameContainer />}
+        </SnackbarContextProvider>
       </AppContext.Provider>
     </div>
   );
