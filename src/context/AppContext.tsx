@@ -7,8 +7,8 @@ import odlaw from '../assets/odlaw.jpg';
 interface IAppContext {
   targetList: Target[];
   gameStatus: string;
-  markTargetFound?: (targetName: string) => void;
-  updateGameStatus?: (newStatus: string) => void;
+  markTargetFound: (targetName: string) => void;
+  updateGameStatus: (newStatus: string) => void;
 }
 
 const defaultState = {
@@ -18,6 +18,8 @@ const defaultState = {
     { name: 'Odlaw', imgUrl: odlaw, found: false },
   ],
   gameStatus: 'start',
+  markTargetFound: () => {},
+  updateGameStatus: () => {},
 };
 
 const AppContext = createContext<IAppContext>(defaultState);
