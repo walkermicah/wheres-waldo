@@ -1,9 +1,32 @@
 import { useContext, useState, useRef } from 'react';
 import AppContext from '../../context/AppContext';
+import SnackbarContext from '../../context/SnackbarContext';
 import TargetingBox from '../TargetingBox';
-import { ClickCoords } from '../../types/types';
+import Snackbar from '../Snackbar';
+import { ClickCoords, CoordData } from '../../types/types';
 import styles from './Game.module.scss';
 import scene from '../../assets/scene.jpg';
+
+const targetCoordinates: CoordData = {
+  Waldo: {
+    x1: 18,
+    x2: 23,
+    y1: 71,
+    y2: 76,
+  },
+  Wizard: {
+    x1: 82,
+    x2: 87,
+    y1: 74,
+    y2: 78,
+  },
+  Odlaw: {
+    x1: 63,
+    x2: 68,
+    y1: 95,
+    y2: 98,
+  },
+};
 
 const Game = (): JSX.Element => {
   const [targetStatus, setTargetStatus] = useState<string>('searching');
@@ -11,6 +34,9 @@ const Game = (): JSX.Element => {
     x: 0,
     y: 0,
   });
+
+  const { gameStatus, markTargetFound } = useContext(AppContext);
+  const { isDisplayed, displayMsg } = useContext(SnackbarContext);
 
   const imageRef = useRef(null);
 
@@ -52,7 +78,25 @@ const Game = (): JSX.Element => {
     toggleTargetStatus();
   };
 
-  const { gameStatus } = useContext(AppContext);
+  const checkTargetFound = (targetName: string): void => {
+    const targetPosition = targetCoordinates[targetName];
+
+    const targetIsFound =
+      clickCoords.x > targetPosition.x1 &&
+      clickCoords.x < targetPosition.x2 &&
+      clickCoords.y > targetPosition.y1 &&
+      clickCoords.y < targetPosition.y2;
+
+    if (targetIsFound) {
+      markTargetFound(targetName);
+      displayMsg(`You found ${targetName}!`, 'success');
+    }
+    if (!targetIsFound) {
+      displayMsg(`That's not ${targetName}! Try again!`, 'failure');
+    }
+
+    toggleTargetStatus();
+  };
 
   const game: string = styles.game;
   const gameOver: string = gameStatus === 'over' ? styles['game-over'] : '';
@@ -60,9 +104,13 @@ const Game = (): JSX.Element => {
 
   return (
     <div className={`${game} ${gameOver}`} onClick={handleClick}>
+      {isDisplayed && <Snackbar />}
       <img src={scene} alt="scene" className={gameImg} ref={imageRef} />
       {targetStatus === 'targeted' && (
-        <TargetingBox clickCoords={clickCoords} />
+        <TargetingBox
+          clickCoords={clickCoords}
+          checkTargetFound={checkTargetFound}
+        />
       )}
     </div>
   );

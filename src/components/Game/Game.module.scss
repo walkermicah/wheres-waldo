@@ -1,6 +1,7 @@
 .game {
   z-index: 0;
   position: relative;
+  display: grid;
 
   &-img {
     width: 100%;

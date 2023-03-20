@@ -5,9 +5,13 @@ import styles from './TargetingBox.module.scss';
 
 type TargetingBoxProps = {
   clickCoords: ClickCoords;
+  checkTargetFound: (targetName: string) => void;
 };
 
-const TargetingBox = ({ clickCoords }: TargetingBoxProps): JSX.Element => {
+const TargetingBox = ({
+  clickCoords,
+  checkTargetFound,
+}: TargetingBoxProps): JSX.Element => {
   const { targetList } = useContext(AppContext);
 
   const box: string = styles.box;
@@ -30,7 +34,11 @@ const TargetingBox = ({ clickCoords }: TargetingBoxProps): JSX.Element => {
           className={`${targets} ${targetsYOrientation} ${targetsXOrientation}`}
         >
           {targetList.map((t) => (
-            <div className={`${target} ${t.found && found}`} key={t.name}>
+            <div
+              className={`${target} ${t.found && found}`}
+              key={t.name}
+              onClick={() => checkTargetFound(t.name)}
+            >
               <img src={t.imgUrl} alt={t.name} className={targetImg} />
             </div>
           ))}
