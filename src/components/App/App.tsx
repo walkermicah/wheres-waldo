@@ -34,9 +34,13 @@ const App = (): JSX.Element => {
       <AppContext.Provider
         value={{ targetList, gameStatus, markTargetFound, updateGameStatus }}
       >
-        <SnackbarContextProvider>
-          {gameStatus === 'start' ? <GameIntro /> : <GameContainer />}
-        </SnackbarContextProvider>
+        {gameStatus === 'start' ? (
+          <GameIntro />
+        ) : (
+          <SnackbarContextProvider>
+            <GameContainer />
+          </SnackbarContextProvider>
+        )}
       </AppContext.Provider>
     </div>
   );
