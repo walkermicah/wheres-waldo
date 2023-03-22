@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid';
 import { useContext, useState, useRef } from 'react';
 import AppContext from '../../context/AppContext';
 import SnackbarContext from '../../context/SnackbarContext';
@@ -113,18 +114,17 @@ const Game = (): JSX.Element => {
   return (
     <div className={`${game} ${gameOver}`} onClick={handleClick}>
       {isDisplayed && <Snackbar />}
-      <div>
-        <img src={scene} alt="scene" className={gameImg} ref={imageRef} />
-        {targetStatus === 'targeted' && (
-          <TargetingBox
-            clickCoords={clickCoords}
-            checkTargetFound={checkTargetFound}
-          />
-        )}
-        {pins.map((p) => (
-          <Pin coords={p} />
-        ))}
-      </div>
+
+      <img src={scene} alt="scene" className={gameImg} ref={imageRef} />
+      {targetStatus === 'targeted' && (
+        <TargetingBox
+          clickCoords={clickCoords}
+          checkTargetFound={checkTargetFound}
+        />
+      )}
+      {pins.map((p) => (
+        <Pin coords={p} key={uuid()} />
+      ))}
     </div>
   );
 };
