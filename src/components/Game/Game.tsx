@@ -6,6 +6,7 @@ import Snackbar from '../Snackbar';
 import { ClickCoords, CoordData } from '../../types/types';
 import styles from './Game.module.scss';
 import scene from '../../assets/scene.jpg';
+import Pin from '../Pin';
 
 const targetCoordinates: CoordData = {
   Waldo: {
@@ -34,6 +35,7 @@ const Game = (): JSX.Element => {
     x: 0,
     y: 0,
   });
+  const [pins, setPins] = useState<ClickCoords[]>([]);
 
   const { gameStatus, markTargetFound } = useContext(AppContext);
   const { isDisplayed, displayMsg } = useContext(SnackbarContext);
@@ -78,6 +80,11 @@ const Game = (): JSX.Element => {
     toggleTargetStatus();
   };
 
+  const addPin = (): void => {
+    const newPins = [...pins, clickCoords];
+    setPins(newPins);
+  };
+
   const checkTargetFound = (targetName: string): void => {
     const targetPosition = targetCoordinates[targetName];
 
@@ -89,6 +96,7 @@ const Game = (): JSX.Element => {
 
     if (targetIsFound) {
       markTargetFound(targetName);
+      addPin();
       displayMsg(`You found ${targetName}!`, 'success');
     }
     if (!targetIsFound) {
@@ -105,13 +113,18 @@ const Game = (): JSX.Element => {
   return (
     <div className={`${game} ${gameOver}`} onClick={handleClick}>
       {isDisplayed && <Snackbar />}
-      <img src={scene} alt="scene" className={gameImg} ref={imageRef} />
-      {targetStatus === 'targeted' && (
-        <TargetingBox
-          clickCoords={clickCoords}
-          checkTargetFound={checkTargetFound}
-        />
-      )}
+      <div>
+        <img src={scene} alt="scene" className={gameImg} ref={imageRef} />
+        {targetStatus === 'targeted' && (
+          <TargetingBox
+            clickCoords={clickCoords}
+            checkTargetFound={checkTargetFound}
+          />
+        )}
+        {pins.map((p) => (
+          <Pin coords={p} />
+        ))}
+      </div>
     </div>
   );
 };
