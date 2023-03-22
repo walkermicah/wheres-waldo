@@ -36,9 +36,8 @@ const Game = (): JSX.Element => {
     x: 0,
     y: 0,
   });
-  const [pins, setPins] = useState<ClickCoords[]>([]);
 
-  const { gameStatus, markTargetFound } = useContext(AppContext);
+  const { gameStatus, markTargetFound, pins, addPin } = useContext(AppContext);
   const { isDisplayed, displayMsg } = useContext(SnackbarContext);
 
   const imageRef = useRef(null);
@@ -81,11 +80,6 @@ const Game = (): JSX.Element => {
     toggleTargetStatus();
   };
 
-  const addPin = (): void => {
-    const newPins = [...pins, clickCoords];
-    setPins(newPins);
-  };
-
   const checkTargetFound = (targetName: string): void => {
     const targetPosition = targetCoordinates[targetName];
 
@@ -97,7 +91,7 @@ const Game = (): JSX.Element => {
 
     if (targetIsFound) {
       markTargetFound(targetName);
-      addPin();
+      addPin(clickCoords);
       displayMsg(`You found ${targetName}!`, 'success');
     }
     if (!targetIsFound) {

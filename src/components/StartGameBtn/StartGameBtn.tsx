@@ -7,12 +7,12 @@ type StartGameBtnProps = {
 };
 
 const StartGameBtn = ({ btnText }: StartGameBtnProps): JSX.Element => {
-  const { updateGameStatus } = useContext(AppContext);
+  const { startGame } = useContext(AppContext);
 
   const startBtn: string = styles.startBtn;
 
   return (
-    <button className={startBtn} onClick={() => updateGameStatus?.('active')}>
+    <button className={startBtn} onClick={() => startGame()}>
       {btnText}
     </button>
   );

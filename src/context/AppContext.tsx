@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { Target } from '../types/types';
+import { ClickCoords, Target } from '../types/types';
 import waldo from '../assets/waldo.jpg';
 import wizard from '../assets/wizard.jpg';
 import odlaw from '../assets/odlaw.jpg';
@@ -8,7 +8,10 @@ interface IAppContext {
   targetList: Target[];
   gameStatus: string;
   markTargetFound: (targetName: string) => void;
-  updateGameStatus: (newStatus: string) => void;
+  startGame: () => void;
+  pins: ClickCoords[];
+  addPin: (coords: ClickCoords) => void;
+  clearPins: () => void;
 }
 
 const defaultState = {
@@ -19,7 +22,10 @@ const defaultState = {
   ],
   gameStatus: 'start',
   markTargetFound: () => {},
-  updateGameStatus: () => {},
+  startGame: () => {},
+  pins: [],
+  addPin: () => {},
+  clearPins: () => {},
 };
 
 const AppContext = createContext<IAppContext>(defaultState);

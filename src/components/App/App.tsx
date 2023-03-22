@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { SnackbarContextProvider } from '../../context/SnackbarContext';
-import { Target } from '../../types/types';
+import { ClickCoords, Target } from '../../types/types';
 import GameIntro from '../GameIntro';
 import GameContainer from '../GameContainer';
 import styles from './App.module.scss';
@@ -16,6 +16,7 @@ const App = (): JSX.Element => {
     { name: 'Odlaw', imgUrl: odlaw, found: false },
   ]);
   const [gameStatus, setGameStatus] = useState<string>('start');
+  const [pins, setPins] = useState<ClickCoords[]>([]);
 
   const markTargetFound = (targetName: string): void => {
     const newTargetList = targetList.map((t): Target => {
@@ -26,12 +27,29 @@ const App = (): JSX.Element => {
 
   const updateGameStatus = (newStatus: string): void => {
     setGameStatus(newStatus);
+    const newTargetList = targetList.map((t) => ({ ...t, found: false }));
+    setTargetList(newTargetList);
+    clearPins();
+  };
+
+  const startGame = (): void => {
+    updateGameStatus('active');
+  };
+
+  const addPin = (coords: ClickCoords): void => {
+    const newPins = [...pins, coords];
+    setPins(newPins);
+  };
+
+  const clearPins = (): void => {
+    const newPins: ClickCoords[] = [];
+    setPins(newPins);
   };
 
   useEffect(() => {
     targetList.every((t) => t.found) &&
       setTimeout(() => {
-        updateGameStatus('over');
+        setGameStatus('over');
         window.scrollTo(0, 0);
       }, 2000);
   }, [targetList]);
@@ -39,7 +57,15 @@ const App = (): JSX.Element => {
   return (
     <div className={styles.App}>
       <AppContext.Provider
-        value={{ targetList, gameStatus, markTargetFound, updateGameStatus }}
+        value={{
+          targetList,
+          gameStatus,
+          markTargetFound,
+          startGame,
+          pins,
+          addPin,
+          clearPins,
+        }}
       >
         {gameStatus === 'start' ? (
           <GameIntro />
