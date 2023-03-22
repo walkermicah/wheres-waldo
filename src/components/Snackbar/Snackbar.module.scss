@@ -1,13 +1,14 @@
 @use '../../styles/variables.scss';
 
 .snackbar {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 100;
   font-family: variables.$app-font;
   font-size: 2rem;
   padding: 1rem 3rem;
   animation: 200ms ease-out forwards slide-down;
+  width: 100%;
 }
 
 @keyframes slide-down {
