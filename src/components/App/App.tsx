@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { SnackbarContextProvider } from '../../context/SnackbarContext';
 import { Target } from '../../types/types';
@@ -15,7 +15,6 @@ const App = (): JSX.Element => {
     { name: 'Wizard', imgUrl: wizard, found: false },
     { name: 'Odlaw', imgUrl: odlaw, found: false },
   ]);
-
   const [gameStatus, setGameStatus] = useState<string>('start');
 
   const markTargetFound = (targetName: string): void => {
@@ -28,6 +27,14 @@ const App = (): JSX.Element => {
   const updateGameStatus = (newStatus: string): void => {
     setGameStatus(newStatus);
   };
+
+  useEffect(() => {
+    targetList.every((t) => t.found) &&
+      setTimeout(() => {
+        updateGameStatus('over');
+        window.scrollTo(0, 0);
+      }, 2000);
+  }, [targetList]);
 
   return (
     <div className={styles.App}>
