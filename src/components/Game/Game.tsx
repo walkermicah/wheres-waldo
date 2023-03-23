@@ -4,31 +4,11 @@ import AppContext from '../../context/AppContext';
 import SnackbarContext from '../../context/SnackbarContext';
 import TargetingBox from '../TargetingBox';
 import Snackbar from '../Snackbar';
-import { ClickCoords, CoordData } from '../../types/types';
+import { ClickCoords } from '../../types/types';
 import styles from './Game.module.scss';
 import scene from '../../assets/scene.jpg';
 import Pin from '../Pin';
-
-const targetCoordinates: CoordData = {
-  Waldo: {
-    x1: 18,
-    x2: 23,
-    y1: 71,
-    y2: 76,
-  },
-  Wizard: {
-    x1: 82,
-    x2: 87,
-    y1: 74,
-    y2: 78,
-  },
-  Odlaw: {
-    x1: 63,
-    x2: 68,
-    y1: 95,
-    y2: 98,
-  },
-};
+import getTargetCoordinates from '../../firebase/getTargetCoordinates';
 
 const Game = (): JSX.Element => {
   const [targetStatus, setTargetStatus] = useState<string>('searching');
@@ -80,25 +60,27 @@ const Game = (): JSX.Element => {
     toggleTargetStatus();
   };
 
-  const checkTargetFound = (targetName: string): void => {
-    const targetPosition = targetCoordinates[targetName];
+  const checkTargetFound = async (targetName: string) => {
+    const targetPosition = await getTargetCoordinates(targetName);
 
-    const targetIsFound =
-      clickCoords.x > targetPosition.x1 &&
-      clickCoords.x < targetPosition.x2 &&
-      clickCoords.y > targetPosition.y1 &&
-      clickCoords.y < targetPosition.y2;
+    if (targetPosition) {
+      const targetIsFound =
+        clickCoords.x > targetPosition.x1 &&
+        clickCoords.x < targetPosition.x2 &&
+        clickCoords.y > targetPosition.y1 &&
+        clickCoords.y < targetPosition.y2;
 
-    if (targetIsFound) {
-      markTargetFound(targetName);
-      addPin(clickCoords);
-      displayMsg(`You found ${targetName}!`, 'success');
+      if (targetIsFound) {
+        markTargetFound(targetName);
+        addPin(clickCoords);
+        displayMsg(`You found ${targetName}!`, 'success');
+      }
+      if (!targetIsFound) {
+        displayMsg(`That's not ${targetName}! Try again!`, 'failure');
+      }
+
+      toggleTargetStatus();
     }
-    if (!targetIsFound) {
-      displayMsg(`That's not ${targetName}! Try again!`, 'failure');
-    }
-
-    toggleTargetStatus();
   };
 
   const game: string = styles.game;
