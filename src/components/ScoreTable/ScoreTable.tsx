@@ -1,13 +1,26 @@
+import { useEffect, useState } from 'react';
+import { getScores } from '../../firebase/scores';
 import { Score } from '../../types/types';
 import styles from './ScoreTable.module.scss';
 
-const scores: Score[] = [
-  { name: 'Ursula', time: '1:23' },
-  { name: 'Elio', time: '3:45' },
-  { name: 'Rosie', time: '6:12' },
-];
-
 const ScoreTable = (): JSX.Element => {
+  const [scores, setScores] = useState<Score[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const scoreData = await getScores();
+      const scores: Score[] = [];
+      if (scoreData) {
+        scoreData.forEach((s) => {
+          scores.push(s.data() as Score);
+        });
+      }
+      const sortedScores = scores.sort((a, b) => (a.time > b.time ? 1 : -1));
+      setScores(sortedScores);
+    };
+    getData();
+  });
+
   const table: string = styles.table;
   const row: string = styles.row;
 
@@ -18,7 +31,7 @@ const ScoreTable = (): JSX.Element => {
         <tbody>
           {scores.map(
             (score): JSX.Element => (
-              <tr className={row}>
+              <tr className={row} key={score.id}>
                 <td>{score.name}</td>
                 <td>{score.time}</td>
               </tr>
