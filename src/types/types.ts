@@ -5,8 +5,9 @@ export type Target = {
 };
 
 export type Score = {
+  id: string;
   name: string;
-  time: string;
+  time: number;
 };
 
 export type ClickCoords = {
