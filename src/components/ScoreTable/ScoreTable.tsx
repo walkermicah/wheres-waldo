@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 import convertToMinutes from '../../util/convertToMinutes';
 import { getScores } from '../../firebase/scores';
 import { Score } from '../../types/types';
@@ -32,7 +33,7 @@ const ScoreTable = (): JSX.Element => {
         <tbody>
           {scores.map(
             (score): JSX.Element => (
-              <tr className={row} key={score.id}>
+              <tr className={row} key={uuid()}>
                 <td>{score.name}</td>
                 <td>{convertToMinutes(score.time)}</td>
               </tr>
