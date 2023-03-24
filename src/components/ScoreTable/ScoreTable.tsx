@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import convertToMinutes from '../../util/convertToMinutes';
 import { getScores } from '../../firebase/scores';
 import { Score } from '../../types/types';
 import styles from './ScoreTable.module.scss';
@@ -33,7 +34,7 @@ const ScoreTable = (): JSX.Element => {
             (score): JSX.Element => (
               <tr className={row} key={score.id}>
                 <td>{score.name}</td>
-                <td>{score.time}</td>
+                <td>{convertToMinutes(score.time)}</td>
               </tr>
             )
           )}
