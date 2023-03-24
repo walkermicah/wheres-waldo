@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const GameContainer = (): JSX.Element => {
   const { gameStatus } = useContext(AppContext);
-  const [time, setTime] = useState<string>('0:00');
+  const [time, setTime] = useState<number>(0);
 
   const incrementTime = (): void => {
     // increment 1 second

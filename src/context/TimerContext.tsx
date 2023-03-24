@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 
 interface ITimerContext {
-  time: string;
+  time: number;
   incrementTime: () => void;
 }
 
 const defaultState = {
-  time: '0:00',
+  time: 0,
   incrementTime: () => {},
 };
 
