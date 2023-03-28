@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
+import { addScore } from '../../firebase/scores';
 import TimerContext from '../../context/TimerContext';
-import { Score } from '../../types/types';
+import convertToMinutes from '../../util/convertToMinutes';
 import styles from './ScoreForm.module.scss';
 
 const ScoreForm = (): JSX.Element => {
@@ -11,11 +12,10 @@ const ScoreForm = (): JSX.Element => {
     setPlayerName((e.target as HTMLInputElement).value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (playerName === '') return;
-    const score: Score = { name: playerName, time: time };
-    console.log(score);
+    await addScore(playerName, time);
     setPlayerName('');
   };
 
@@ -40,7 +40,7 @@ const ScoreForm = (): JSX.Element => {
         </div>
         <div className={formField}>
           <label htmlFor="time">Time</label>
-          <input name="time" value={time} readOnly disabled />
+          <input name="time" value={convertToMinutes(time)} readOnly disabled />
         </div>
       </div>
       <button className={submit} type="submit">
