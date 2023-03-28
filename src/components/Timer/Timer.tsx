@@ -5,6 +5,7 @@ import styles from './Timer.module.scss';
 
 const Timer = (): JSX.Element => {
   const { time } = useContext(TimerContext);
+
   const timer: string = styles.timer;
 
   return <div className={timer}>{convertToMinutes(time)}</div>;

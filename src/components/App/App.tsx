@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AppContext from '../../context/AppContext';
 import { SnackbarContextProvider } from '../../context/SnackbarContext';
 import { ClickCoords, Target } from '../../types/types';
@@ -8,6 +8,7 @@ import styles from './App.module.scss';
 import waldo from '../../assets/waldo.jpg';
 import wizard from '../../assets/wizard.jpg';
 import odlaw from '../../assets/odlaw.jpg';
+import TimerContext from '../../context/TimerContext';
 
 const App = (): JSX.Element => {
   const [targetList, setTargetList] = useState<Target[]>([
@@ -18,6 +19,17 @@ const App = (): JSX.Element => {
   const [gameStatus, setGameStatus] = useState<string>('start');
   const [pins, setPins] = useState<ClickCoords[]>([]);
 
+  const { startTimer, stopTimer, timerOn, incrementTime, clearTimer } =
+    useContext(TimerContext);
+
+  useEffect(() => {
+    if (!timerOn) return;
+    const tick = setInterval(incrementTime, 1000);
+    return () => {
+      clearInterval(tick);
+    };
+  }, [incrementTime, timerOn]);
+
   const markTargetFound = (targetName: string): void => {
     const newTargetList = targetList.map((t): Target => {
       return t.name === targetName ? { ...t, found: true } : t;
@@ -25,15 +37,13 @@ const App = (): JSX.Element => {
     setTargetList(newTargetList);
   };
 
-  const updateGameStatus = (newStatus: string): void => {
-    setGameStatus(newStatus);
+  const startGame = (): void => {
+    setGameStatus('active');
     const newTargetList = targetList.map((t) => ({ ...t, found: false }));
     setTargetList(newTargetList);
     clearPins();
-  };
-
-  const startGame = (): void => {
-    updateGameStatus('active');
+    clearTimer();
+    startTimer();
   };
 
   const addPin = (coords: ClickCoords): void => {
@@ -53,6 +63,10 @@ const App = (): JSX.Element => {
         window.scrollTo(0, 0);
       }, 2000);
   }, [targetList]);
+
+  useEffect(() => {
+    targetList.every((t) => t.found) && stopTimer();
+  }, [targetList, stopTimer]);
 
   return (
     <div className={styles.App}>
