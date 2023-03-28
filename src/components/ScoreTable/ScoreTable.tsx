@@ -20,8 +20,9 @@ const ScoreTable = (): JSX.Element => {
       const sortedScores = scores.sort((a, b) => (a.time > b.time ? 1 : -1));
       setScores(sortedScores);
     };
+
     getData();
-  });
+  }, [scores]);
 
   const table: string = styles.table;
   const row: string = styles.row;
